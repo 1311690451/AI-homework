@@ -40,7 +40,7 @@ while flag==0 && iteration<10   % ·ÀÖ¹Ñ­»·³¬¹ı10´ÎËÀ»ú
                 search(layer + 1) = n;
                 break;
             end
-            %É¾³ıÖØ¸´
+%             %É¾³ıÖØ¸´
 %             if layer >= 2
 %                 for m = 1:past-1
 %                     if parents(layer).date(m).c == parents(layer+1).date(n).c
