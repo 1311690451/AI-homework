@@ -27,6 +27,7 @@ while flag==0 && iteration<100   % 防止循环超过100次死机
         matrix = parents(layer).date(i).c;
         [rows ,cols] = find(matrix==0);
         
+		%再没有限制得移动和排除上一次得移动情况，防止回到上一个状态
         if date == 1
             dir = direction(rows ,cols);
         else 
@@ -46,7 +47,7 @@ while flag==0 && iteration<100   % 防止循环超过100次死机
         end
         
         
-        %这里设置一下优先级，可以使得搜索可以有序的进行
+        %这里设置一下优先级，可以使得搜索可以有序的进行，沿着一个分支进行
         if dir(1) == 0
             parents(layer).date(NO).c = move(matrix ,1);
             NO = NO + 1;
@@ -65,10 +66,11 @@ while flag==0 && iteration<100   % 防止循环超过100次死机
             result = 4;
         end
         
-            %判别网络
+            %判别网络，退出判定
             A = parents(layer).date(NO-1).c;
             if isequal(A, target)
                 flag = 1;
+                fprintf("实验成功！");
                 break;
             end
             
@@ -82,7 +84,7 @@ while flag==0 && iteration<100   % 防止循环超过100次死机
                 end
             end
         
-        if flag==1
+        if flag==1%强制退出，再加一层保险
             break;
         end
         

@@ -17,15 +17,17 @@ iteration=0;   % 记录循环次数
 step = 0;
 
 while flag==0 && iteration<10   % 防止循环超过10次死机
-    for i = 1 : past
+    %遍历上一层计算出来的节点，进行计算
+	for i = 1 : past
         step = step + 1;
         search(layer) = i;
         
         matrix = parents(layer).date(i).c;
         [rows ,cols] = find(matrix==0);
         
-        dir = direction(rows ,cols);
+        dir = direction(rows ,cols);		%获得可以移动的方向
         
+		%写入移动之后得状态
         for t = 1 : 4
             if dir(t) == 0
                 parents(layer+1).date(NO).c = move(matrix ,t);
@@ -33,6 +35,7 @@ while flag==0 && iteration<10   % 防止循环超过10次死机
             end
         end
         
+		%判别网络
         for n = 1:NO-1
             A = parents(layer+1).date(n).c;
             if isequal(A, target) == 1
@@ -55,6 +58,7 @@ while flag==0 && iteration<10   % 防止循环超过10次死机
         end
         
         if flag==1
+            fprintf("实验成功");
             break;
         end
         
